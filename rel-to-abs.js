@@ -160,7 +160,8 @@ exports.convertUrl = function(url, base_url) {
   else if(url.charAt(0) == "/")
       return base.protocol + "//" + base.host + url;
   else if(url.substring(0,2) == "./")
-      url = "." + url;
+    //  url = "." + url;
+      url = "";
   else if(/^\s*$/.test(url))
       return ""; //Empty = Return nothing
   else url = "/" + url;
@@ -169,8 +170,8 @@ exports.convertUrl = function(url, base_url) {
   var i=0
   while(/\/\.\.\//.test(url = url.replace(/[^\/]+\/+\.\.\//g,"")));
 
-  /* Escape certain characters to prevent XSS */
+  /* Escape certain characters to prevent XSS 
   url = url.replace(/\.$/,"").replace(/\/\./g,"").replace(/"/g,"%22")
-          .replace(/'/g,"%27").replace(/</g,"%3C").replace(/>/g,"%3E");
+          .replace(/'/g,"%27").replace(/</g,"%3C").replace(/>/g,"%3E");*/
   return url;
 }
