@@ -1,7 +1,7 @@
 'use strict';
 
 const request = require('request-promise');
-const converter = require('rel-to-abs');
+const converter = require('./rel-to-abs');
 const fs = require('fs');
 const index = fs.readFileSync('index.html', 'utf8');
 const ResponseBuilder = require('./app/ResponseBuilder');
