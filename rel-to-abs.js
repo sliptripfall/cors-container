@@ -134,9 +134,7 @@ exports.convert = function(html, base_url) {
 
   cr("<"+any+att+"href\\s*="+any+">", "href"); /* Linked elements */
   cr("<"+any+att+"src\\s*="+any+">", "src"); /* Embedded elements */
-
-  /* <form action="/login" method="post" class="form" id="loginform">  */
-  cr("<form action="+any+">", "form");
+  cr("<"+any+att+"action\\s*="+any+">", "action"); /* Form elements */
 
   cr("<object"+any+att+"data\\s*="+any+">", "data"); /* <object data= > */
   cr("<applet"+any+att+"codebase\\s*="+any+">", "codebase"); /* <applet codebase= > */
