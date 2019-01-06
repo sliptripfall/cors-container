@@ -25,7 +25,8 @@ module.exports = function(app){
             uri: requestedUrl,
             resolveWithFullResponse: true,
             headers: {
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36'
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36',
+                'rewrite-urls': true
             }
         })
         .then(originResponse => {            
@@ -36,15 +37,11 @@ module.exports = function(app){
                 .addHeaderByKeyValue('X-Proxied-By', 'cors-container')
                 .addHeaderByKeyValue('rewrite-urls', true)
                 .build(originResponse.headers);
-            if(req.headers['rewrite-urls']){
                 res.send(
                     converter
                         .convert(originResponse.body, requestedUrl)
                         .replace(requestedUrl, corsBaseUrl + '/' + requestedUrl)
-                ); 
-            }else{
-                res.send(originResponse.body);                
-            }
+                );
         })
         .catch(originResponse => {
             responseBuilder
